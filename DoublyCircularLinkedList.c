@@ -3,9 +3,6 @@
  *
  *  Data Structures
  *
- *  School of Computer Science
- *  at Chungbuk National University
- *
  */
 
 
@@ -36,6 +33,9 @@ void printList(listNode* h);
 
 int main()
 {
+
+	printf("\n\n----- [Park Mira] [2020069006] -----]\n\n");
+
 	char command;
 	int key;
 	listNode* headnode=NULL;
@@ -122,16 +122,16 @@ int initialize(listNode** h) {
 /*Doubly Circular LinkedList 초기화 함수*/
 int freeList(listNode* h){
 
-    listNode* p = h->rlink;
-    listNode* prev = (listNode *)malloc(sizeof(listNode));
+    listNode* p = h->rlink; //현재 노드를 첫 노드로 설정함.
+    listNode* prev = (listNode *)malloc(sizeof(listNode)); //현재 노드의 전 단계로 동적할당 해제의 대상이 되는 변수
 
     while(p != h){
-        prev = p;
-        p = p->rlink;
-        free(prev);
+        prev = p;       //현재위치 복사
+        p = p->rlink;   //다음위치로 이동
+        free(prev);     //현재위치의 노드 동적 할당 해제
     }
 
-    free(h);
+    free(h);  //마지막으로 헤더노드 해제
 
 
 	return 0;
@@ -382,6 +382,23 @@ int deleteNode(listNode* h, int key) {
 /*Doubly Circular LinkedList를 전치하는 함수*/
 int invertList(listNode* h) {
 
+
+	listNode* p = h;        //현재 노드 위치를 나타냄
+	listNode* swap = NULL;     //잠시 노드 위치를 보관할 변수
+	listNode* next = NULL;  //다음 노드의 위치를 담는 변수
+
+	while(next != h){
+		next = p->rlink;
+
+		//rlink 값과 llink 값을 서로 change
+		swap = p->rlink;         
+		p->rlink = p->llink;
+		p->llink = swap;
+
+		//현재 노드를 다음노드로 변경함
+		p = next;
+
+	}
 
 	return 0;
 }
