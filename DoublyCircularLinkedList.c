@@ -1,6 +1,5 @@
 /*
  *  doubly circular linked list
- *
  *  Data Structures
  *
  */
